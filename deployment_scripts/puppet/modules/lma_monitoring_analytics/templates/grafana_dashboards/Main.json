@@ -540,8 +540,8 @@
             {
               "function": "last",
               "column": "value",
-              "series": "merge(/\\.rabbitmq.status$/)",
-              "query": "select last(value) from merge(/\\.rabbitmq.status$/) where $timeFilter group by time($interval) order asc",
+              "series": "merge(/node-[0-9][0-9]*[0-9]*[0-9]*[0-9]*.rabbitmq.status$/)",
+              "query": "select last(value) from merge(/node-[0-9][0-9]*[0-9]*[0-9]*[0-9]*.rabbitmq.status$/) where $timeFilter group by time($interval) order asc",
               "rawQuery": false,
               "interval": "",
               "fill": ""
