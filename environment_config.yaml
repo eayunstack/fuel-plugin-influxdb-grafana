@@ -1,4 +1,8 @@
 attributes:
+  metadata:
+    restrictions:
+        - condition: "true"
+          action: "hide"
 
   node_name:
     value: 'influxdb'

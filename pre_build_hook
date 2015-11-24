@@ -7,19 +7,21 @@ RPM_REPO="${ROOT}"/repositories/centos/
 DEB_REPO="${ROOT}"/repositories/ubuntu/
 
 # Puppet manifests for influx
-INFLUXDB_TARBALL_URL="https://forgeapi.puppetlabs.com/v3/files/jdowning-influxdb-0.3.0.tar.gz"
-STAGING_TARBALL_URL="https://forgeapi.puppetlabs.com/v3/files/nanliu-staging-1.0.3.tar.gz"
+INFLUXDB_TARBALL_URL="http://192.168.5.19/fuel-plugins-tarball/jdowning-influxdb-0.3.0.tar.gz"
+STAGING_TARBALL_URL="http://192.168.5.19/fuel-plugins-tarball/nanliu-staging-1.0.3.tar.gz"
 
 # Puppet manifests required for grafana
-NGINX_TARBALL_URL="https://forgeapi.puppetlabs.com/v3/files/jfryman-nginx-0.2.2.tar.gz"
+NGINX_TARBALL_URL="http://192.168.5.19/fuel-plugins-tarball/jfryman-nginx-0.2.2.tar.gz"
 
 # Puppet manifests from fuel-lib
 FUEL_LIB_VERSION="6.0"
-FUEL_LIB_TARBALL_URL="https://github.com/stackforge/fuel-library/archive/${FUEL_LIB_VERSION}.tar.gz"
+FUEL_LIB_TARBALL_URL="http://192.168.5.19/fuel-library/${FUEL_LIB_VERSION}.tar.gz"
+FUEL_LIB_VERSION_6_1="6.1"
+FUEL_LIB_TARBALL_URL_6_1="http://192.168.5.19/fuel-library/${FUEL_LIB_VERSION_6_1}.tar.gz"
 
 # Get the disk_management from fuel-plugin-elasticsearch-kibana
 ES_KIBANA_VERSION="0.7.2"
-MODULE_DISK_MANAGEMENT="https://github.com/stackforge/fuel-plugin-elasticsearch-kibana/archive/${ES_KIBANA_VERSION}.tar.gz"
+MODULE_DISK_MANAGEMENT="http://192.168.5.19/fuel-plugins-tarball/fuel-plugin-elasticsearch-kibana-0.7.2.tar.gz"
 
 # Downloads needed RPM or DEB packages
 function download {
@@ -36,12 +38,11 @@ function download {
     done
 }
 
-download deb http://get.influxdb.org/influxdb_0.8.8_amd64.deb
-download rpm http://get.influxdb.org/influxdb-0.8.8-1.x86_64.rpm
+download rpm http://192.168.5.19/fuel-plugins/centos/Packages/influxdb-0.8.8-1.x86_64.rpm
 
 # Install puppet manifests
 # Clean-up first
-rm -rf "${MODULES:?}"/{influxdb,nginx,staging,stdlib,concat,inifile,disk_management,lvm}
+rm -rf "${MODULES:?}"/{influxdb,nginx,staging,stdlib,concat,inifile,disk_management,lvm,firewall,l23network,openstack,sysctl,tweaks,sysfs}
 mkdir -p "${MODULES}"/{influxdb,nginx,staging}
 
 # Include influxdb manifests, its dependendy and nginx.
@@ -52,7 +53,12 @@ wget -qO- "${NGINX_TARBALL_URL}" | tar -C "${MODULES}/nginx" --strip-components=
 # Include dependent manifests from fuel-library
 wget -qO- "${FUEL_LIB_TARBALL_URL}" | \
     tar -C "${MODULES}" --strip-components=3 -zxvf - \
-    fuel-library-${FUEL_LIB_VERSION}/deployment/puppet/{stdlib,concat,inifile,lvm}
+    fuel-library-${FUEL_LIB_VERSION}/deployment/puppet/{stdlib,concat,inifile,lvm,firewall,l23network,openstack,sysctl,tweaks}
+
+# Include dependent manifests from fuel-library-6.1
+wget -qO- "${FUEL_LIB_TARBALL_URL_6_1}" | \
+    tar -C "${MODULES}" --strip-components=3 -zxvf - \
+    fuel-library-${FUEL_LIB_VERSION_6_1}/deployment/puppet/sysfs
 
 # Include disk_management
 wget -qO- "${MODULE_DISK_MANAGEMENT}" | \
@@ -60,7 +66,7 @@ wget -qO- "${MODULE_DISK_MANAGEMENT}" | \
     fuel-plugin-elasticsearch-kibana-${ES_KIBANA_VERSION}/deployment_scripts/puppet/modules/disk_management
 
 # We need to embed grafana sources into the lma_monitoring_analytics module.
-GRAFANA_TARBALL_URL="http://grafanarel.s3.amazonaws.com/grafana-1.9.1.tar.gz"
+GRAFANA_TARBALL_URL="http://192.168.5.19/fuel-plugins-tarball/grafana-1.9.1.tar.gz"
 GRAFANA_FOLDER="${MODULES}/lma_monitoring_analytics/files/grafana/sources"
 mkdir -p "${GRAFANA_FOLDER}"
 wget -qO- "${GRAFANA_TARBALL_URL}" | tar -C "${GRAFANA_FOLDER}" --strip-components=1 -xz
