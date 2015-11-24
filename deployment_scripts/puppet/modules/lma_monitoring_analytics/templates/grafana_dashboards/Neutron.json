@@ -590,7 +590,7 @@
         {
           "title": "dhcp",
           "error": false,
-          "span": 2,
+          "span": 1,
           "editable": true,
           "type": "singlestat",
           "id": 15,
@@ -641,7 +641,7 @@
         {
           "title": "L3",
           "error": false,
-          "span": 2,
+          "span": 1,
           "editable": true,
           "type": "singlestat",
           "id": 16,
@@ -692,7 +692,7 @@
         {
           "title": "metadata",
           "error": false,
-          "span": 2,
+          "span": 1,
           "editable": true,
           "type": "singlestat",
           "id": 17,
@@ -743,7 +743,7 @@
         {
           "title": "openvswitch",
           "error": false,
-          "span": 3,
+          "span": 1,
           "editable": true,
           "type": "singlestat",
           "id": 18,
@@ -792,14 +792,116 @@
           }
         },
         {
+          "title": "lbaas",
+          "error": false,
+          "span": 1,
+          "editable": true,
+          "type": "singlestat",
+          "id": 19,
+          "links": [],
+          "maxDataPoints": 100,
+          "interval": "> 60s",
+          "targets": [
+            {
+              "function": "last",
+              "column": "value",
+              "series": "merge(/openstack.neutron.agents.lbaas.disabled/)",
+              "query": "select last(value) from merge(/openstack.neutron.agents.lbaas.disabled/) where $timeFilter group by time($interval) order asc",
+              "fill": ""
+            }
+          ],
+          "cacheTimeout": null,
+          "format": "none",
+          "prefix": "",
+          "postfix": "",
+          "nullText": null,
+          "valueMaps": [
+            {
+              "value": "null",
+              "op": "=",
+              "text": "N/A"
+            }
+          ],
+          "nullPointMode": "connected",
+          "valueName": "current",
+          "prefixFontSize": "50%",
+          "valueFontSize": "80%",
+          "postfixFontSize": "50%",
+          "thresholds": "0,1,1",
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "sparkline": {
+            "show": false,
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "fillColor": "rgba(31, 118, 189, 0.18)"
+          }
+        },
+        {
+          "title": "qos",
+          "error": false,
+          "span": 1,
+          "editable": true,
+          "type": "singlestat",
+          "id": 20,
+          "links": [],
+          "maxDataPoints": 100,
+          "interval": "> 60s",
+          "targets": [
+            {
+              "function": "last",
+              "column": "value",
+              "series": "merge(/openstack.neutron.agents.qos.disabled/)",
+              "query": "select last(value) from merge(/openstack.neutron.agents.qos.disabled/) where $timeFilter group by time($interval) order asc",
+              "fill": ""
+            }
+          ],
+          "cacheTimeout": null,
+          "format": "none",
+          "prefix": "",
+          "postfix": "",
+          "nullText": null,
+          "valueMaps": [
+            {
+              "value": "null",
+              "op": "=",
+              "text": "N/A"
+            }
+          ],
+          "nullPointMode": "connected",
+          "valueName": "current",
+          "prefixFontSize": "50%",
+          "valueFontSize": "80%",
+          "postfixFontSize": "50%",
+          "thresholds": "0,1,1",
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "sparkline": {
+            "show": false,
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "fillColor": "rgba(31, 118, 189, 0.18)"
+          }
+        },
+        {
           "title": "",
           "error": false,
-          "span": 2,
+          "span": 4,
           "editable": true,
           "type": "text",
-          "id": 19,
-          "mode": "html",
-          "content": "<br />\n<h3 align=\"center\"> Up </h3>",
+          "id": 21,
+          "mode": "text",
+          "content": "",
           "style": {},
           "links": []
         },
@@ -808,8 +910,20 @@
           "error": false,
           "span": 2,
           "editable": true,
+          "type": "text",
+          "id": 22,
+          "mode": "html",
+          "content": "<br />\n<h3 align=\"center\"> Up </h3>",
+          "style": {},
+          "links": []
+        },
+        {
+          "title": "",
+          "error": false,
+          "span": 1,
+          "editable": true,
           "type": "singlestat",
-          "id": 20,
+          "id": 23,
           "links": [],
           "maxDataPoints": 100,
           "interval": "> 60s",
@@ -857,10 +971,10 @@
         {
           "title": "",
           "error": false,
-          "span": 2,
+          "span": 1,
           "editable": true,
           "type": "singlestat",
-          "id": 21,
+          "id": 24,
           "links": [],
           "maxDataPoints": 100,
           "interval": "> 60s",
@@ -908,10 +1022,10 @@
         {
           "title": "",
           "error": false,
-          "span": 2,
+          "span": 1,
           "editable": true,
           "type": "singlestat",
-          "id": 22,
+          "id": 25,
           "links": [],
           "maxDataPoints": 100,
           "interval": "> 60s",
@@ -959,10 +1073,10 @@
         {
           "title": "",
           "error": false,
-          "span": 3,
+          "span": 1,
           "editable": true,
           "type": "singlestat",
-          "id": 23,
+          "id": 26,
           "links": [],
           "maxDataPoints": 100,
           "interval": "> 60s",
@@ -1010,12 +1124,114 @@
         {
           "title": "",
           "error": false,
-          "span": 2,
+          "span": 1,
+          "editable": true,
+          "type": "singlestat",
+          "id": 27,
+          "links": [],
+          "maxDataPoints": 100,
+          "interval": "> 60s",
+          "targets": [
+            {
+              "function": "last",
+              "column": "value",
+              "series": "merge(/openstack.neutron.agents.lbaas.up/)",
+              "query": "select last(value) from merge(/openstack.neutron.agents.lbaas.up/) where $timeFilter group by time($interval) order asc",
+              "fill": ""
+            }
+          ],
+          "cacheTimeout": null,
+          "format": "none",
+          "prefix": "",
+          "postfix": "",
+          "nullText": null,
+          "valueMaps": [
+            {
+              "value": "null",
+              "op": "=",
+              "text": "N/A"
+            }
+          ],
+          "nullPointMode": "connected",
+          "valueName": "current",
+          "prefixFontSize": "50%",
+          "valueFontSize": "80%",
+          "postfixFontSize": "50%",
+          "thresholds": "0,1,1",
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "sparkline": {
+            "show": false,
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "fillColor": "rgba(31, 118, 189, 0.18)"
+          }
+        },
+        {
+          "title": "",
+          "error": false,
+          "span": 1,
+          "editable": true,
+          "type": "singlestat",
+          "id": 28,
+          "links": [],
+          "maxDataPoints": 100,
+          "interval": "> 60s",
+          "targets": [
+            {
+              "function": "last",
+              "column": "value",
+              "series": "merge(/openstack.neutron.agents.qos.up/)",
+              "query": "select last(value) from merge(/openstack.neutron.agents.qos.up/) where $timeFilter group by time($interval) order asc",
+              "fill": ""
+            }
+          ],
+          "cacheTimeout": null,
+          "format": "none",
+          "prefix": "",
+          "postfix": "",
+          "nullText": null,
+          "valueMaps": [
+            {
+              "value": "null",
+              "op": "=",
+              "text": "N/A"
+            }
+          ],
+          "nullPointMode": "connected",
+          "valueName": "current",
+          "prefixFontSize": "50%",
+          "valueFontSize": "80%",
+          "postfixFontSize": "50%",
+          "thresholds": "0,1,1",
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "sparkline": {
+            "show": false,
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "fillColor": "rgba(31, 118, 189, 0.18)"
+          }
+        },
+        {
+          "title": "",
+          "error": false,
+          "span": 4,
           "editable": true,
           "type": "text",
-          "id": 24,
-          "mode": "html",
-          "content": "<br />\n<h3 align=\"center\"> Down </h3>",
+          "id": 29,
+          "mode": "text",
+          "content": "",
           "style": {},
           "links": []
         },
@@ -1024,8 +1240,20 @@
           "error": false,
           "span": 2,
           "editable": true,
+          "type": "text",
+          "id": 30,
+          "mode": "html",
+          "content": "<br />\n<h3 align=\"center\"> Down </h3>",
+          "style": {},
+          "links": []
+        },
+        {
+          "title": "",
+          "error": false,
+          "span": 1,
+          "editable": true,
           "type": "singlestat",
-          "id": 25,
+          "id": 31,
           "links": [],
           "maxDataPoints": 100,
           "interval": "> 60s",
@@ -1073,10 +1301,10 @@
         {
           "title": "",
           "error": false,
-          "span": 2,
+          "span": 1,
           "editable": true,
           "type": "singlestat",
-          "id": 26,
+          "id": 32,
           "links": [],
           "maxDataPoints": 100,
           "interval": "> 60s",
@@ -1124,10 +1352,10 @@
         {
           "title": "",
           "error": false,
-          "span": 2,
+          "span": 1,
           "editable": true,
           "type": "singlestat",
-          "id": 27,
+          "id": 33,
           "links": [],
           "maxDataPoints": 100,
           "interval": "> 60s",
@@ -1175,10 +1403,10 @@
         {
           "title": "",
           "error": false,
-          "span": 3,
+          "span": 1,
           "editable": true,
           "type": "singlestat",
-          "id": 28,
+          "id": 34,
           "links": [],
           "maxDataPoints": 100,
           "interval": "> 60s",
@@ -1222,6 +1450,120 @@
             "lineColor": "rgb(31, 120, 193)",
             "fillColor": "rgba(31, 118, 189, 0.18)"
           }
+        },
+        {
+          "title": "",
+          "error": false,
+          "span": 1,
+          "editable": true,
+          "type": "singlestat",
+          "id": 35,
+          "links": [],
+          "maxDataPoints": 100,
+          "interval": "> 60s",
+          "targets": [
+            {
+              "function": "last",
+              "column": "value",
+              "series": "merge(/openstack.neutron.agents.lbaas.down/)",
+              "query": "select last(value) from merge(/openstack.neutron.agents.lbaas.down/) where $timeFilter group by time($interval) order asc",
+              "fill": ""
+            }
+          ],
+          "cacheTimeout": null,
+          "format": "none",
+          "prefix": "",
+          "postfix": "",
+          "nullText": null,
+          "valueMaps": [
+            {
+              "value": "null",
+              "op": "=",
+              "text": "N/A"
+            }
+          ],
+          "nullPointMode": "connected",
+          "valueName": "current",
+          "prefixFontSize": "50%",
+          "valueFontSize": "80%",
+          "postfixFontSize": "50%",
+          "thresholds": "1,0,0",
+          "colorBackground": false,
+          "colorValue": true,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(255, 255, 255, 0.89)",
+            "rgba(255, 255, 255, 0.97)"
+          ],
+          "sparkline": {
+            "show": false,
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "fillColor": "rgba(31, 118, 189, 0.18)"
+          }
+        },
+        {
+          "title": "",
+          "error": false,
+          "span": 1,
+          "editable": true,
+          "type": "singlestat",
+          "id": 36,
+          "links": [],
+          "maxDataPoints": 100,
+          "interval": "> 60s",
+          "targets": [
+            {
+              "function": "last",
+              "column": "value",
+              "series": "merge(/openstack.neutron.agents.qos.down/)",
+              "query": "select last(value) from merge(/openstack.neutron.agents.qos.down/) where $timeFilter group by time($interval) order asc",
+              "fill": ""
+            }
+          ],
+          "cacheTimeout": null,
+          "format": "none",
+          "prefix": "",
+          "postfix": "",
+          "nullText": null,
+          "valueMaps": [
+            {
+              "value": "null",
+              "op": "=",
+              "text": "N/A"
+            }
+          ],
+          "nullPointMode": "connected",
+          "valueName": "current",
+          "prefixFontSize": "50%",
+          "valueFontSize": "80%",
+          "postfixFontSize": "50%",
+          "thresholds": "1,0,0",
+          "colorBackground": false,
+          "colorValue": true,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(255, 255, 255, 0.89)",
+            "rgba(255, 255, 255, 0.97)"
+          ],
+          "sparkline": {
+            "show": false,
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "fillColor": "rgba(31, 118, 189, 0.18)"
+          }
+        },
+        {
+          "title": "",
+          "error": false,
+          "span": 4,
+          "editable": true,
+          "type": "text",
+          "id": 37,
+          "mode": "text",
+          "content": "",
+          "style": {},
+          "links": []
         }
       ],
       "showTitle": true
